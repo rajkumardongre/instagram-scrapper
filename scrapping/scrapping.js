@@ -7,13 +7,12 @@ const postImageSelector = "._aagv img";
 const postCaptionSelector = "._a9zs";
 const postAuthorSelector = "._a9zc"
 
-async function scrapPostById(id) {
+const launchBrowser = async () => {
   const browser = await puppeteer.launch(
     {
       args: [
         "--disable-setuid-sandbox",
         "--no-sandbox",
-        "--single-process",
         "--no-zygote",
       ],
       executablePath:
@@ -22,11 +21,16 @@ async function scrapPostById(id) {
           : puppeteer.executablePath(),
     }
   );
+  return browser;
+}
+
+async function scrapPostById(id) {
   const url = `https://www.instagram.com/p/${id}/`;
+  console.log(`Scrapping post ${url} initiated...`);
+  const browser = await launchBrowser();
   
   try {
     const page = await browser.newPage();
-    console.log(`Scrapping post ${url} initiated...`);
     await page.goto(url);
 
     console.log(`locating caption form ${url} post...`);
@@ -100,21 +104,10 @@ function extractId(url) {
 async function scrapPostByTags(tag) {
   console.time("total time");
   console.log(`Scrapping all post with tag ${tag}...`);
-  const browser = await puppeteer.launch({
-    args: [
-      "--disable-setuid-sandbox",
-      "--no-sandbox",
-      "--single-process",
-      "--no-zygote",
-    ],
-    executablePath:
-      process.env.NODE_ENV === "production"
-        ? process.env.PUPPETEER_EXECUTABLE_PATH
-        : puppeteer.executablePath(),
-  });
+  const browser = await launchBrowser();
+  const url = `https://www.instagram.com/explore/tags/${tag}`;
   try {
     const page = await browser.newPage();
-    const url = `https://www.instagram.com/explore/tags/${tag}`;
     await page.goto(url);
     console.log(`Open url ${url}`);
 
@@ -156,7 +149,8 @@ async function scrapPostByTags(tag) {
     postCardSelector,
     postImageSelector,
   );
- 
+  
+  console.log(`Posts fetched from ${tag}`)
   await populatePostsData(posts);
   
   console.timeEnd("total time");
@@ -172,19 +166,20 @@ async function scrapPostByTags(tag) {
 
 // populate post time and caption
 const populatePostsData = async (posts) => {
+  console.log(`\n\nPopulating posts...`)
   try {
-    const captionPromiseArray = [];
+    const postDataPromiseArray = [];
     posts.forEach(async (post) => {
-      captionPromiseArray.push(scrapPostById(post.id));
+      postDataPromiseArray.push(scrapPostById(post.id));
     });
-    const postData = await Promise.all(captionPromiseArray);
+    const postData = await Promise.all(postDataPromiseArray);
     for (let i = 0; i < posts.length; i++) {
       posts[i].caption = postData[i].caption;
       posts[i].time = postData[i].time;
       posts[i].postImgUrl = postData[i].postImgUrl;
       posts[i].author = postData[i].author;
     }
-    console.log("Successfully popultated the posts with captions.");
+    console.log("\n\nSuccessfully popultated the posts with captions.\n\n");
   } catch (error) {
     throw error;
   }
