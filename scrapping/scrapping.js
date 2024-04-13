@@ -26,6 +26,7 @@ const launchBrowser = async () => {
 }
 
 async function scrapPostById(id) {
+  console.time(`Time post ${id}`)
   const url = `https://www.instagram.com/p/${id}/`;
   console.log(`Scrapping post ${url} initiated...`);
   const browser = await launchBrowser();
@@ -76,6 +77,8 @@ async function scrapPostById(id) {
       postImageSelector,
       postAuthorSelector
     );
+    console.timeEnd(`Time post ${id}`)
+    console.log(`Succcessfull scrap post ${url}.\n\n`)
     return {
       alt: postData.alt,
       caption: postData.caption,
@@ -174,18 +177,15 @@ async function scrapPostByTags(tag) {
 const populatePostsData = async (posts) => {
   console.log(`\n\nPopulating posts...`)
   try {
-    const postDataPromiseArray = [];
-    posts.forEach(async (post) => {
-      postDataPromiseArray.push(scrapPostById(post.id));
-    });
-    const postData = await Promise.all(postDataPromiseArray);
-    for (let i = 0; i < posts.length; i++) {
-      posts[i].caption = postData[i].caption;
-      posts[i].time = postData[i].time;
-      posts[i].postImgUrl = postData[i].postImgUrl;
-      posts[i].author = postData[i].author;
-    }
-    console.log("\n\nSuccessfully popultated the posts with captions.\n\n");
+    for(let i=0; i<posts.length; i++){
+      const postData = await scrapPostById(posts[i].id);
+      posts[i].caption = postData.caption;
+      posts[i].time = postData.time;
+      posts[i].postImgUrl = postData.postImgUrl;
+      posts[i].author = postData.author;
+    };
+    
+    console.log("\n\nSuccessfully popultated the posts.\n\n");
   } catch (error) {
     throw error;
   }
