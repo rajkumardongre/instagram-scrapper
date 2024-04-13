@@ -22,10 +22,10 @@ async function scrapPostById(id) {
           : puppeteer.executablePath(),
     }
   );
+  const url = `https://www.instagram.com/p/${id}/`;
   
   try {
     const page = await browser.newPage();
-    const url = `https://www.instagram.com/p/${id}/`;
     console.log(`Scrapping post ${url} initiated...`);
     await page.goto(url);
 
