@@ -7,8 +7,9 @@ async function searchPosts() {
             openModal("Enter some tag", closable=true);
             return;
         }
+        searchInput = searchInput.split(" ").join("");
         openModal("Loading...")
-        const response = await fetch("/api/posts/tag/" + searchInput)
+        const response = await fetch(`/api/posts/tag/${searchInput}`)
         const data = await response.json();
         console.log(data)
         if(!data.success){

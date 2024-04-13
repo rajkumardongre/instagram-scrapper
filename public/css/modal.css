@@ -24,15 +24,18 @@
     top: 0px;
     right: 0px;
     cursor: pointer;
-    border-radius: 50%;
-    padding: 1px;
+    padding: 3px;
     display: none;
     background-color: #ff5151;
     color: white;
     font-weight: bold;
     padding-inline: 6px;
+    border-bottom-left-radius: 9px;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 9px;
+    padding-inline: 8px;
 }
-
 .overlay {
     display: none;
     position: fixed;

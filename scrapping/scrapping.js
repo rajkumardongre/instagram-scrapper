@@ -89,7 +89,6 @@ function extractId(url) {
   const regex = /https:\/\/www.instagram.com\/p\/(.*?)\//;
   const match = url.match(regex);
   if (match && match.length > 1) {
-    console.log(match[1])
     return match[1];
   } else {
     console.error("Invalid URL or ID not found");
@@ -118,19 +117,20 @@ async function scrapPostByTags(tag) {
     const url = `https://www.instagram.com/explore/tags/${tag}`;
     await page.goto(url);
     console.log(`Open url ${url}`);
-    console.log(`Waiting to load page...`);
-    
+
+    console.log(`locating postCardSelector on ${url}`);
     await page.waitForSelector(postCardSelector);
+    console.log(`locating postImageSelector on ${url}`);
     await page.waitForSelector(postImageSelector);
     
     await page.exposeFunction("extractId", extractId);
 
     // await page.exposeFunction("publicUrl", publicUrl);
-
+    console.log(`Evaluting TAG page ${url}`)
   const posts = await page.evaluate(
     async (postCardSelector, postImageSelector) => {
-      function viewableImgUrl(url){
-        const p = url.split("/");
+      function viewableImgUrl(img_url){
+        const p = img_url.split("/");
         var t = '';
         for (let i = 0; i < p.length; i++) {
             if(i==2){
