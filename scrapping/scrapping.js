@@ -34,6 +34,7 @@ async function scrapPostById(id) {
   const page = await browser2.newPage();
   
   try {
+    console.log(`Loading post page: ${url}`)
     await page.goto(url);
 
     console.log(`locating caption form ${url} post...`);
