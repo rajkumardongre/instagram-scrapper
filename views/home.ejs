@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstagramScrapper</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <a class="logo-link" href="/">
+                    InstagramScrapper
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/#api" class="nav-link">API</a></li>
+                <li><a href="/demo/tag" class="nav-link">Demo</a></li>
+                <li><a href="#" class="nav-link">Github</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section class="hero-section">
+        <div class="hero-content">
+            <h2>Scrape Instagram with Ease</h2>
+            <p>InstagramScrapper provides Free API to extract data from Instagram.</p>
+        </div>
+    </section>
+    <main>
+        <section class="api-section" id="api">
+            <div class="api-content">
+            </div>
+            <u>
+                <h2>API</h2>
+            </u>
+            <div style="padding: 1rem;">
+                <div>
+                    <p>1. Scrap posts by tag</p>
+                    <div class="api-box"><span class="method">GET</span>/api/posts/tag/<span class="query">:tag</span>
+                    </div>
+                </div>
+                <div>
+                    <p>2. Scrap post by ID</p>
+                    <div class="api-box"><span class="method">GET</span>/api/posts/<span class="query">:postId</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

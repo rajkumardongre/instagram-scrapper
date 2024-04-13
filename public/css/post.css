@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    background-color: #DEF2F1;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    padding-top: 100px;
+}
+
+.post {
+    display: flex;
+    /* background-color: #FEFFFF; */
+    max-height: 500px;
+}
+
+/* .post-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+} */
+
+.post-image img {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.post-details {
+    flex: 1;
+    padding: 20px;
+    height: 300px;
+    overflow-y: auto; /* Make post-details scrollable */
+    scrollbar-width: thin; /* Custom scrollbar for Firefox */
+    scrollbar-color: #2B7A78 #FEFFFF; /* Custom scrollbar color for Firefox */
+    /* border-left: 2px solid #2B7A78; */
+    background-color: #FEFFFF;
+    margin-left: 8px;
+    border-radius: 8px;
+}
+
+/* Custom scrollbar for Webkit browsers */
+.post-details::-webkit-scrollbar {
+    width: 8px;
+}
+
+.post-details::-webkit-scrollbar-track {
+    background: #FEFFFF;
+}
+
+.post-details::-webkit-scrollbar-thumb {
+    background-color: #2B7A78;
+    border-radius: 4px;
+}
+
+.author-name {
+    margin: 0;
+    font-size: 24px;
+}
+
+.date {
+    margin: 10px 0;
+    color: #6C757D;
+}
+
+.caption {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+}

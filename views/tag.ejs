@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag | InstagramScrapper</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/modal.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/tag.css">
+    <script src="/src/cDg.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js" integrity="sha512-hUhvpC5f8cgc04OZb55j0KNGh4eh7dLxd/dPSJ5VyzqDWxsayYbojWyl5Tkcgrmb/RVKCRJI1jNlRbVP4WWC4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+</head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <a class="logo-link" href="/">
+                InstagramScrapper
+            </a>
+            <ul class="nav-links">
+                <li><a href="/#api" class="nav-link">API</a></li>
+                <li><a href="/demo/tag" class="nav-link">Demo</a></li>
+                <li><a href="#" class="nav-link">Github</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="search-container">
+            <input id="searchInput" type="text" placeholder="Search post by #tag">
+            <button class="search-btn" id="search-btn">Search</button>
+        </div>
+        <div class="posts-container" id="postsContainer">
+            <!-- Sample Post Card -->
+            <!-- <div class="post-card">
+                    <img id="img-1" src="https://instagram.fpnq2-1.fna.fbcdn.net/v/t51.29350-15/436405481_979866036835702_7950757814843732439_n.heic?stp=dst-jpg_e35_s640x640_sh0.08&_nc_ht=instagram.fpnq2-1.fna.fbcdn.net&_nc_cat=110&_nc_ohc=vDErj4u_lj8Ab7AA9fo&edm=AOUPxh0BAAAA&ccb=7-5&oh=00_AfDOlHd4Mm7w7m6bVqXm4b6Ewxp2x-uqvcmgO215MGB1nw&oe=661E104A&_nc_sid=9dc660" alt="Post Image">
+                    <div class="post-info">
+                        <h2>Author Name</h2>
+                        <p>Description of the post goes here goes here goes here goes heregoes here</p>
+                        <span class="timestamp">5 days ago</span>
+                    </div>
+                </div> -->
+            <!-- <div class="post-card">
+                    <img id="img-2" src="https://instagram.fpnq2-1.fna.fbcdn.net/v/t51.29350-15/436405481_979866036835702_7950757814843732439_n.heic?stp=dst-jpg_e35_s640x640_sh0.08&_nc_ht=instagram.fpnq2-1.fna.fbcdn.net&_nc_cat=110&_nc_ohc=vDErj4u_lj8Ab7AA9fo&edm=AOUPxh0BAAAA&ccb=7-5&oh=00_AfDOlHd4Mm7w7m6bVqXm4b6Ewxp2x-uqvcmgO215MGB1nw&oe=661E104A&_nc_sid=9dc660" alt="Post Image">
+                    <div class="post-info">
+                        <h2>Author Name</h2>
+                        <p>Description of the post goes here goes here goes here goes heregoes here</p>
+                        <span class="timestamp">5 days ago</span>
+                    </div>
+                </div> -->
+            <!-- <div class="post-card">
+                    <img id="img-3" src="https://instagram.fpnq2-1.fna.fbcdn.net/v/t51.29350-15/436405481_979866036835702_7950757814843732439_n.heic?stp=dst-jpg_e35_s640x640_sh0.08&_nc_ht=instagram.fpnq2-1.fna.fbcdn.net&_nc_cat=110&_nc_ohc=vDErj4u_lj8Ab7AA9fo&edm=AOUPxh0BAAAA&ccb=7-5&oh=00_AfDOlHd4Mm7w7m6bVqXm4b6Ewxp2x-uqvcmgO215MGB1nw&oe=661E104A&_nc_sid=9dc660" alt="Post Image">
+                    <div class="post-info">
+                        <h2>Author Name</h2>
+                        <p>Description of the post goes here goes here goes here goes heregoes here</p>
+                        <span class="timestamp">5 days ago</span>
+                    </div>
+                </div> -->
+            <!-- <div class="post-card">
+                    <img id="img-4" src="https://instagram.fpnq2-1.fna.fbcdn.net/v/t51.29350-15/436405481_979866036835702_7950757814843732439_n.heic?stp=dst-jpg_e35_s640x640_sh0.08&_nc_ht=instagram.fpnq2-1.fna.fbcdn.net&_nc_cat=110&_nc_ohc=vDErj4u_lj8Ab7AA9fo&edm=AOUPxh0BAAAA&ccb=7-5&oh=00_AfDOlHd4Mm7w7m6bVqXm4b6Ewxp2x-uqvcmgO215MGB1nw&oe=661E104A&_nc_sid=9dc660" alt="Post Image">
+                    <div class="post-info">
+                        <h2>Author Name</h2>
+                        <p>Description of the post goes here goes here goes here goes heregoes here</p>
+                        <span class="timestamp">5 days ago</span>
+                    </div>
+                </div> -->
+            <!-- End of Sample Post Card -->
+            <!-- You can add more post cards here -->
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <p class="close" onclick="closeModal()">&times;</p>
+            <p id="modal-message"></p>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+    <script src="/js/modal.js"></script>
+    <script>
+        //    console.log(new cDg('img-1').view());
+        //    new cDg('img-2').view();
+        //    new cDg('img-3').view();
+        //    new cDg('img-4').view();
+    </script>
+
+    <script type="module" src="/js/tag.js"></script>
+</body>
+
+</html>

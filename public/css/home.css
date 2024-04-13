@@ -1,0 +1,88 @@
+body {
+    margin: 0;
+    background-color: #DEF2F1;
+}
+
+section {
+   
+    color: black;
+    border-bottom: 2px solid #2B7A78;
+    height: 100vh;
+}
+
+.hero-section{
+    /* padding: 20px 20px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: xx-large;
+}
+
+.hero-content{
+    max-width: 800px;
+}
+
+.api-section{
+    /* padding: 2rem; */
+    font-size: x-large;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* height: 70vh; */
+}
+
+.api-section h2{
+    align-self: self-start;
+}
+
+p{
+    margin: 0;
+    padding: 0;
+}
+
+.api-box{
+    background-color: white;
+    padding: 1rem ;
+    margin: 1rem 0;
+    width: fit-content;
+    font-size: x-large;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-left: 4rem;
+}
+
+.method{
+    padding: 0.5rem;
+    background-color: #2B7A78;
+    color: white;
+    border-radius: 4px;
+    margin-right: 1rem;
+}
+
+.query{
+    color: red;
+}
+
+.demo-section{
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.demo-btn {
+    padding: 10px 20px;
+    background-color: #3AAFA9;
+    color: #FEFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.demo-btn:hover {
+    background-color: #2B7A78;
+}
