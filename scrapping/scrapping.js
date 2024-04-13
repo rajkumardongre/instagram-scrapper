@@ -10,8 +10,9 @@ const postAuthorSelector = "._a9zc"
 const launchBrowser = async () => {
   const browser = await puppeteer.launch(
     {
+      headless: true,
       args: [
-        "--disable-setuid-sandbox",
+        // "--disable-setuid-sandbox",
         "--no-sandbox",
         "--no-zygote",
       ],
@@ -28,9 +29,11 @@ async function scrapPostById(id) {
   const url = `https://www.instagram.com/p/${id}/`;
   console.log(`Scrapping post ${url} initiated...`);
   const browser = await launchBrowser();
+  const browserWSEndpoint = await browser.wsEndpoint()
+  const browser2 = await puppeteer.connect({ browserWSEndpoint })
+  const page = await browser2.newPage();
   
   try {
-    const page = await browser.newPage();
     await page.goto(url);
 
     console.log(`locating caption form ${url} post...`);
@@ -72,7 +75,6 @@ async function scrapPostById(id) {
       postImageSelector,
       postAuthorSelector
     );
-
     return {
       alt: postData.alt,
       caption: postData.caption,
@@ -84,6 +86,9 @@ async function scrapPostById(id) {
     console.error(`Error while scraping post ${url}:`, error);
     throw new Error(`Error while scraping post ${url}: ${error.message}`)
   } finally {
+    await page.goto('about:blank') // because of you: https://github.com/puppeteer/puppeteer/issues/1490
+    await page.close()
+    await browser2.disconnect()
     await browser.close(); // Ensure browser closure
     console.log(`Scrapping post ${url} Done!`)
   }
