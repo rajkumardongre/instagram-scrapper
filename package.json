@@ -19,7 +19,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.3.1",
     "multer": "^1.4.5-lts.1",
-    "puppeteer": "^19.7.2",
+    "puppeteer": "^22.6.4",
     "validator": "^13.11.0"
   }
 }
