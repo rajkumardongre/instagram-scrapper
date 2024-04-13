@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+// const {publicUrl} = require("./cDg")
 require("dotenv").config();
 
 const postCardSelector = "._aagu";
@@ -38,6 +39,18 @@ async function scrapPostById(id) {
     console.log(`Evaluting ${url} post...`)
     const postData = await page.evaluate(
       (postCaptionSelector, postImageSelector, postAuthorSelector) => {
+
+        function viewableImgUrl(url){
+          const p = url.split("/");
+          var t = '';
+          for (let i = 0; i < p.length; i++) {
+              if(i==2){
+                  t += p[i].replaceAll('-', '--').replaceAll('.','-')+atob('LnRyYW5zbGF0ZS5nb29n')+'/';
+              } else { if(i != p.length-1){ t += p[i]+'/'; } else { t += p[i]; } }
+          }
+          return encodeURI(t);
+        }
+
         const author = document.querySelector(postAuthorSelector).innerText
 
         const captionElement = document.querySelector(postCaptionSelector);
@@ -48,7 +61,8 @@ async function scrapPostById(id) {
           allTimeElements[allTimeElements.length - 1].dateTime;
 
         const img = document.querySelector(postImageSelector);
-        return { alt: img.alt, src: img.src, time: uploadedTime, caption, author };
+        const src = viewableImgUrl(img.src);
+        return { alt: img.alt, src, time: uploadedTime, caption, author };
       },
       postCaptionSelector,
       postImageSelector,
@@ -75,12 +89,14 @@ function extractId(url) {
   const regex = /https:\/\/www.instagram.com\/p\/(.*?)\//;
   const match = url.match(regex);
   if (match && match.length > 1) {
+    console.log(match[1])
     return match[1];
   } else {
     console.error("Invalid URL or ID not found");
     return "";
   }
 }
+
 
 async function scrapPostByTags(tag) {
   console.time("total time");
@@ -109,9 +125,21 @@ async function scrapPostByTags(tag) {
     
     await page.exposeFunction("extractId", extractId);
 
+    // await page.exposeFunction("publicUrl", publicUrl);
+
   const posts = await page.evaluate(
     async (postCardSelector, postImageSelector) => {
-      console.log(`Page Loaded successfully.`);
+      function viewableImgUrl(url){
+        const p = url.split("/");
+        var t = '';
+        for (let i = 0; i < p.length; i++) {
+            if(i==2){
+                t += p[i].replaceAll('-', '--').replaceAll('.','-')+atob('LnRyYW5zbGF0ZS5nb29n')+'/';
+            } else { if(i != p.length-1){ t += p[i]+'/'; } else { t += p[i]; } }
+        }
+        return encodeURI(t);
+      }
+
       const postElements = document.querySelectorAll(postCardSelector);
       
       const scrapPosts = [];
@@ -119,7 +147,8 @@ async function scrapPostByTags(tag) {
       for (const postElement of postElements) {
         const img = postElement.querySelector(postImageSelector);
         const id = await window.extractId(postElement.parentElement.href); // Extract ID from href
-        scrapPosts.push({ id, imgUrl: img.src, alt: img.alt });
+        const imgUrl = viewableImgUrl(img.src);
+        scrapPosts.push({ id, imgUrl: imgUrl, alt: img.alt });
       }   
       
       return scrapPosts;
@@ -127,7 +156,7 @@ async function scrapPostByTags(tag) {
     postCardSelector,
     postImageSelector,
   );
-  
+ 
   await populatePostsData(posts);
   
   console.timeEnd("total time");

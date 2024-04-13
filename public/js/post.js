@@ -32,7 +32,7 @@ function displayPost(post) {
             </div>
         </div>
     `; 
-    new cDg(`post-img`).view();
+    // new cDg(`post-img`).view();
 }
 
 const splitUrl = window.location.href.split('/');
